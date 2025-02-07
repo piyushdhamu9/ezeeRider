@@ -35,6 +35,7 @@ const Home = () => {
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
   const [ride, setRide] = useState(null);
+  const [availableDrivers, setAvailableDrivers] = useState([]);
 
   const navigate = useNavigate();
 
@@ -196,12 +197,13 @@ const Home = () => {
       {
         params: { pickup, destination },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`, // Corrected
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
       }
     );
 
-    setFare(response.data);
+    setFare(response.data.fare);
+    setAvailableDrivers(response.data.drivers);
   }
 
   async function createRide() {
@@ -214,7 +216,7 @@ const Home = () => {
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`, // Corrected
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
       }
     );
@@ -231,7 +233,10 @@ const Home = () => {
       <Navbar />
       <div className="flex justify-center p-10">
         <div className="w-1/2">
-          {!vehiclePanel && !confirmRidePanel && !vehicleFound && !waitingForDriver ? (
+          {!vehiclePanel &&
+          !confirmRidePanel &&
+          !vehicleFound &&
+          !waitingForDriver ? (
             // Find Trip Section
             <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
               <h5
@@ -289,6 +294,7 @@ const Home = () => {
                 fare={fare}
                 setConfirmRidePanel={setConfirmRidePanel}
                 setVehiclePanel={setVehiclePanel}
+                availableDrivers={availableDrivers}
               />
             </div>
           ) : confirmRidePanel ? (
@@ -347,42 +353,17 @@ const Home = () => {
           </div>
         </div>
         <div className="h-screen w-screen">
-          <LiveTracking 
+          <LiveTracking
             pickup={pickup}
             destination={destination}
-            showDirections={vehiclePanel || confirmRidePanel || vehicleFound || waitingForDriver}
+            showDirections={
+              vehiclePanel ||
+              confirmRidePanel ||
+              vehicleFound ||
+              waitingForDriver
+            }
           />
         </div>
-
-        {/* <div ref={confirmRidePanelRef} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"> */}
-        {/* <ConfirmRide
-            createRide={createRide}
-            pickup={pickup}
-            destination={destination}
-            fare={fare}
-            vehicleType={vehicleType}
-            setConfirmRidePanel={setConfirmRidePanel}
-            setVehicleFound={setVehicleFound}
-          /> */}
-        {/* </div> */}
-        {/* <div ref={vehicleFoundRef} className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"> */}
-        {/* <LookingForDriver
-            createRide={createRide}
-            pickup={pickup}
-            destination={destination}
-            fare={fare}
-            vehicleType={vehicleType}
-            setVehicleFound={setVehicleFound}
-          /> */}
-        {/* </div> */}
-        {/* <div ref={waitingForDriverRef} className="fixed w-full  z-10 bottom-0  bg-white px-3 py-6 pt-12"> */}
-        {/* <WaitingForDriver
-            ride={ride}
-            setVehicleFound={setVehicleFound}
-            setWaitingForDriver={setWaitingForDriver}
-            waitingForDriver={waitingForDriver}
-          /> */}
-        {/* </div> */}
       </div>
     </div>
   );
