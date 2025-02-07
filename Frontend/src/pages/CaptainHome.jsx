@@ -28,18 +28,18 @@ const CaptainHome = () => {
       userId: captain._id,
       userType: "captain",
     });
-    
+
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const location = {
-            lat: position.coords.latitude,  // Changed from ltd to lat
-            lng: position.coords.longitude
+            lat: position.coords.latitude, // Changed from ltd to lat
+            lng: position.coords.longitude,
           };
-          
+
           socket.emit("update-location-captain", {
             userId: captain._id,
-            location: location
+            location: location,
           });
         });
       }
@@ -115,11 +115,11 @@ const CaptainHome = () => {
 
         {/* Right Section - Map */}
         <div className="w-2/3 h-full">
-          <LiveTracking 
+          <LiveTracking
             isCaptain={true}
             currentLocation={{
               lat: parseFloat(captain?.location?.lat) || 0,
-              lng: parseFloat(captain?.location?.lng) || 0
+              lng: parseFloat(captain?.location?.lng) || 0,
             }}
           />
         </div>
