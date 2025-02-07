@@ -1,37 +1,26 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom"; // Add Navigate import
+import { Link, Navigate } from "react-router-dom";
 import LiveTracking from "../components/LiveTracking";
+import Navbar from "../components/Navbar";
 
 const Start = () => {
-  // Add token check at the start of component
-  const token = localStorage.getItem("token");
-  if (token) {
-    return <Navigate to="/home" replace />;
+  const userToken = localStorage.getItem("userToken");
+  const driverToken = localStorage.getItem("driverToken");
+
+  let continueLink;
+
+  if (userToken) {
+    continueLink = "/home";
+  } else if (driverToken) {
+    continueLink = "/captain-home";
+  } else {
+    continueLink = "/login";
   }
 
   return (
     <div className="w-full flex flex-col scroll-smooth ">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-      {/* Navbar */}
-      <nav className="w-full bg-black text-white p-2 flex justify-between items-center">
-        <div className="text-3xl mx-11">Rider</div>
-        <div className=" text-sm space-x-4 mx-6">
-          <button className="p-1">EN</button>
-          <button className="p-1">Help</button>
-          <Link
-            to="/login"
-            className="px-3 py-2 text-white hover:bg-white hover:text-black hover:rounded-full"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/signup"
-            className="px-3 py-2 text-white hover:bg-white hover:text-black hover:rounded-full"
-          >
-            Sign up
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Main Content */}
       <div className="flex h-screen">
@@ -62,7 +51,7 @@ const Start = () => {
             />
           </div>
           <Link
-            to="/login"
+            to={continueLink}
             className="w-3/4 p-3 bg-black text-white rounded flex items-center justify-center"
           >
             Continue

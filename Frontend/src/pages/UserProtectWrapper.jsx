@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserProtectWrapper = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("userToken");
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserDataContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,10 +28,10 @@ const UserProtectWrapper = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
-        localStorage.removeItem("token");
+        localStorage.removeItem("userToken"); // Corrected
         navigate("/login");
       });
-  }, [token]);
+  }, [token, navigate, setUser]); // Added dependencies
 
   if (isLoading) {
     return <div>Loading...</div>;

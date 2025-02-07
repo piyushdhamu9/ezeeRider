@@ -26,9 +26,8 @@ const Captainlogin = () => {
 
     if (response.status === 200) {
       const data = response.data;
-
       setCaptain(data.captain);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("driverToken", data.token);
       navigate("/captain-home");
     }
 

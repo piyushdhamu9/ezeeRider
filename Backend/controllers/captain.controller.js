@@ -57,7 +57,7 @@ module.exports.loginCaptain = async (req, res, next) => {
 
   const token = captain.generateAuthToken();
 
-  res.cookie("token", token);
+  res.cookie("driverToken", token); // Changed cookie name
 
   res.status(200).json({ token, captain });
 };
@@ -67,11 +67,11 @@ module.exports.getCaptainProfile = async (req, res, next) => {
 };
 
 module.exports.logoutCaptain = async (req, res, next) => {
-  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+  const token = req.cookies.driverToken || req.headers.authorization?.split(" ")[1]; // Changed cookie name
 
   await blackListTokenModel.create({ token });
 
-  res.clearCookie("token");
+  res.clearCookie("driverToken"); // Changed cookie name
 
   res.status(200).json({ message: "Logout successfully" });
 };

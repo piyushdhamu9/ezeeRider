@@ -43,7 +43,7 @@ const Home = () => {
 
   useEffect(() => {
     socket.emit("join", { userType: "user", userId: user._id });
-  }, [user]);
+  }, [user, socket]);
 
   socket.on("ride-confirmed", (ride) => {
     setVehicleFound(false);
@@ -65,7 +65,7 @@ const Home = () => {
         {
           params: { input: e.target.value },
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`, // Corrected
           },
         }
       );
@@ -83,7 +83,7 @@ const Home = () => {
         {
           params: { input: e.target.value },
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`, // Corrected
           },
         }
       );
@@ -196,7 +196,7 @@ const Home = () => {
       {
         params: { pickup, destination },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`, // Corrected
         },
       }
     );
@@ -214,7 +214,7 @@ const Home = () => {
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`, // Corrected
         },
       }
     );
@@ -295,12 +295,13 @@ const Home = () => {
             // Confirm Ride Section
             <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
               <ConfirmRide
-                createRide={createRide}
+                setVehiclePanel={setVehiclePanel}
+                setConfirmRidePanel={setConfirmRidePanel}
                 pickup={pickup}
                 destination={destination}
                 fare={fare}
                 vehicleType={vehicleType}
-                setConfirmRidePanel={setConfirmRidePanel}
+                createRide={createRide}
                 setVehicleFound={setVehicleFound}
               />
             </div>
@@ -308,12 +309,12 @@ const Home = () => {
             // Looking for Driver Section
             <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
               <LookingForDriver
-                createRide={createRide}
+                setVehicleFound={setVehicleFound}
+                setConfirmRidePanel={setConfirmRidePanel}
                 pickup={pickup}
                 destination={destination}
                 fare={fare}
                 vehicleType={vehicleType}
-                setVehicleFound={setVehicleFound}
               />
             </div>
           ) : (

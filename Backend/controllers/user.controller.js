@@ -62,7 +62,7 @@ module.exports.loginUser = async (req, res, next) => {
   }
 
   const token = user.generateAuthToken();
-  res.cookie("token", token);
+  res.cookie("userToken", token); // Changed cookie name
   res.status(200).json({ 
     status: "success",
     token, 
@@ -75,8 +75,8 @@ module.exports.getUserProfile = async (req, res, next) => {
 };
 
 module.exports.logoutUser = async (req, res, next) => {
-  res.clearCookie("token");
-  const token = req.cookies.token || req.headers.authorization.split(" ")[1];
+  res.clearCookie("userToken"); // Changed cookie name
+  const token = req.cookies.userToken || req.headers.authorization.split(" ")[1]; // Changed cookie name
 
   await blackListTokenModel.create({ token });
 

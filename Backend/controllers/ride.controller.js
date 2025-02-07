@@ -10,7 +10,7 @@ module.exports.createRide = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { userId, pickup, destination, vehicleType } = req.body;
+  const { pickup, destination, vehicleType } = req.body;
 
   try {
     const ride = await rideService.createRide({
@@ -21,20 +21,24 @@ module.exports.createRide = async (req, res) => {
     });
     res.status(201).json(ride);
 
+    // Get pickup coordinates to find nearby drivers
     const pickupCoordinates = await mapService.getAddressCoordinate(pickup);
 
+    // Find captains within 5km radius
     const captainsInRadius = await mapService.getCaptainsInTheRadius(
-      pickupCoordinates.ltd,
+      pickupCoordinates.lat, // Corrected
       pickupCoordinates.lng,
-      2
+      5
     );
 
-    ride.otp = "";
+    ride.otp = ""; // Remove OTP for security
 
+    // Get ride with populated user details
     const rideWithUser = await rideModel
       .findOne({ _id: ride._id })
       .populate("user");
 
+    // Send notification to each nearby captain
     captainsInRadius.map((captain) => {
       sendMessageToSocketId(captain.socketId, {
         event: "new-ride",
