@@ -238,7 +238,7 @@ const Home = () => {
           !vehicleFound &&
           !waitingForDriver ? (
             // Find Trip Section
-            <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
+            <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl border border-gray-200">
               <h5
                 ref={panelCloseRef}
                 onClick={() => {
@@ -288,51 +288,47 @@ const Home = () => {
             </div>
           ) : vehiclePanel ? (
             // Vehicle Panel Section
-            <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
-              <VehiclePanel
-                selectVehicle={handleVehicleSelect}
-                fare={fare}
-                setConfirmRidePanel={setConfirmRidePanel}
-                setVehiclePanel={setVehiclePanel}
-                availableDrivers={availableDrivers}
-              />
-            </div>
+
+            <VehiclePanel
+              selectVehicle={handleVehicleSelect}
+              fare={fare}
+              setConfirmRidePanel={setConfirmRidePanel}
+              setVehiclePanel={setVehiclePanel}
+              availableDrivers={availableDrivers}
+            />
           ) : confirmRidePanel ? (
             // Confirm Ride Section
-            <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
-              <ConfirmRide
-                setVehiclePanel={setVehiclePanel}
-                setConfirmRidePanel={setConfirmRidePanel}
-                pickup={pickup}
-                destination={destination}
-                fare={fare}
-                vehicleType={vehicleType}
-                createRide={createRide}
-                setVehicleFound={setVehicleFound}
-              />
-            </div>
+
+            <ConfirmRide
+              setVehiclePanel={setVehiclePanel}
+              setConfirmRidePanel={setConfirmRidePanel}
+              pickup={pickup}
+              destination={destination}
+              fare={fare}
+              vehicleType={vehicleType}
+              createRide={createRide}
+              setVehicleFound={setVehicleFound}
+            />
           ) : vehicleFound ? (
             // Looking for Driver Section
-            <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
-              <LookingForDriver
-                setVehicleFound={setVehicleFound}
-                setConfirmRidePanel={setConfirmRidePanel}
-                pickup={pickup}
-                destination={destination}
-                fare={fare}
-                vehicleType={vehicleType}
-              />
-            </div>
+
+            <LookingForDriver
+              setVehicleFound={setVehicleFound}
+              setConfirmRidePanel={setConfirmRidePanel}
+              pickup={pickup}
+              destination={destination}
+              fare={fare}
+              vehicleType={vehicleType}
+            />
           ) : (
             // Waiting for Driver Section
-            <div className="mx-8 p-6 relative border-2 border-solid border-gray-100 rounded-lg bg-white">
-              <WaitingForDriver
-                ride={ride}
-                setVehicleFound={setVehicleFound}
-                setWaitingForDriver={setWaitingForDriver}
-                waitingForDriver={waitingForDriver}
-              />
-            </div>
+
+            <WaitingForDriver
+              ride={ride}
+              setVehicleFound={setVehicleFound}
+              setWaitingForDriver={setWaitingForDriver}
+              waitingForDriver={waitingForDriver}
+            />
           )}
 
           {/* Location search panel */}

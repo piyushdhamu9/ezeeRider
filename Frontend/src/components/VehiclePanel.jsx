@@ -16,7 +16,7 @@ const VehiclePanel = ({
   const getVehicleImage = (type) => {
     switch (type) {
       case "car":
-        return "https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg";
+        return "https://banner2.cleanpng.com/20180616/oph/aa61w3amk.webp";
       case "moto":
         return "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_638,w_956/v1649231091/assets/2c/7fa194-c954-49b2-9c6d-a3b8601370f5/original/Uber_Moto_Orange_312x208_pixels_Mobile.png";
       case "auto":
@@ -27,14 +27,14 @@ const VehiclePanel = ({
   };
 
   return (
-    <div className="w-full">
+    <div className="max-w-md mx-auto p-6 bg-white shadow-xl rounded-2xl border border-gray-300">
       <div className="flex justify-between items-center mb-5">
-        <h3 className="text-2xl font-semibold">Choose a Ride</h3>
+        <h3 className="text-2xl font-bold text-gray-800">Choose a Ride</h3>
         <button
           onClick={() => setVehiclePanel(false)}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 hover:text-gray-700 transition duration-200"
         >
-          <i className="ri-arrow-left-line text-xl"></i>
+          <i className="ri-arrow-left-line text-2xl"></i>
         </button>
       </div>
 
@@ -43,29 +43,25 @@ const VehiclePanel = ({
           <div
             key={driver._id}
             onClick={() => handleVehicleSelect(driver.vehicle.vehicleType)}
-            className="flex border-2 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between"
+            className="flex items-center justify-between p-4 mb-3 bg-gray-100 border-2 border-transparent hover:border-gray-700 rounded-xl cursor-pointer transition duration-300"
           >
             <img
-              className="h-10"
+              className="h-12 "
               src={getVehicleImage(driver.vehicle.vehicleType)}
               alt={driver.vehicle.vehicleType}
             />
-            <div className="ml-2 w-1/2">
-              <h4 className="font-medium text-base">
-                {driver.vehicle.vehicleType}{" "}
-                <span>
-                  <i className="ri-user-3-fill"></i>
+            <div className="ml-3 w-2/3">
+              <h4 className="font-semibold text-lg text-gray-800 flex items-center gap-1">
+                {driver.vehicle.vehicleType.charAt(0).toUpperCase() + driver.vehicle.vehicleType.slice(1)}
+                <span className="flex items-center text-gray-600 text-sm">
+                  <i className="ri-user-3-fill mr-1"></i>
                   {driver.vehicle.capacity}
                 </span>
               </h4>
-              <h5 className="font-medium text-sm">2 mins away </h5>
-              <p className="font-normal text-xs text-gray-600">
-                {driver.fullname.firstname}
-              </p>
+              <h5 className="text-gray-600 text-sm">2 mins away</h5>
+              <p className="text-xs text-gray-500">Driver: {driver.fullname.firstname}</p>
             </div>
-            <h2 className="text-lg font-semibold">
-              ₹{fare[driver.vehicle.vehicleType]}
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-900">₹{fare[driver.vehicle.vehicleType]}</h2>
           </div>
         ))}
     </div>
