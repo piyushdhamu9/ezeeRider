@@ -151,7 +151,7 @@ module.exports.startRide = async ({ rideId, otp, captain }) => {
   return ride;
 };
 
-module.exports.endRide = async ({ rideId, captain }) => {
+module.exports.endRide = async ({ rideId, captainId }) => {
   if (!rideId) {
     throw new Error("Ride id is required");
   }
@@ -159,7 +159,7 @@ module.exports.endRide = async ({ rideId, captain }) => {
   const ride = await rideModel
     .findOne({
       _id: rideId,
-      captain: captain._id,
+      captain: captainId,
     })
     .populate("user")
     .populate("captain")

@@ -1,12 +1,12 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const LookingForDriver = (props) => {
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl border border-gray-200">
       <div className="flex justify-between items-center mb-5">
         <h3 className="text-2xl font-semibold">Looking for a Driver</h3>
-        <button 
+        <button
           onClick={() => {
             if (props.setVehicleFound) props.setVehicleFound(false);
             if (props.setConfirmRidePanel) props.setConfirmRidePanel(true);
@@ -42,7 +42,7 @@ const LookingForDriver = (props) => {
           <div className="flex items-center gap-3 py-2">
             <i className="ri-currency-line text-xl text-green-600"></i>
             <div>
-            <h3 className="text-base font-semibold text-gray-800">Fare</h3>
+              <h3 className="text-base font-semibold text-gray-800">Fare</h3>
               <h3 className="text-base font-semibold text-gray-800">
                 ₹{props.fare[props.vehicleType]}
               </h3>
@@ -61,7 +61,7 @@ LookingForDriver.propTypes = {
   pickup: PropTypes.string,
   destination: PropTypes.string,
   fare: PropTypes.object,
-  vehicleType: PropTypes.string
+  vehicleType: PropTypes.string,
 };
 
 export default LookingForDriver;

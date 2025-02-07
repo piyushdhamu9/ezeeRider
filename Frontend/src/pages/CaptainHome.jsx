@@ -105,7 +105,7 @@ const CaptainHome = () => {
   );
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className=" flex flex-col">
       <Navbar />
       <div className="flex h-[calc(100vh-64px)]">
         {/* Left Section */}
@@ -127,7 +127,7 @@ const CaptainHome = () => {
         {/* Ride Popup Panel */}
         <div
           ref={ridePopupPanelRef}
-          className="fixed w-1/3 z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12 left-0"
+          className="fixed w-1/3 h-screen z-10 bottom-0 rounded-lg translate-y-full"
         >
           <RidePopUp
             ride={ride}
@@ -140,7 +140,7 @@ const CaptainHome = () => {
         {/* Confirm Ride Popup Panel */}
         <div
           ref={confirmRidePopupPanelRef}
-          className="fixed w-1/3 h-screen z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12 left-0"
+          className="fixed w-1/3 h-screen z-10 bottom-0 rounded-lg  translate-y-full  "
         >
           <ConfirmRidePopUp
             ride={ride}

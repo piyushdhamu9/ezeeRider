@@ -352,6 +352,7 @@ const Home = () => {
           <LiveTracking
             pickup={pickup}
             destination={destination}
+            availableDrivers={availableDrivers}
             showDirections={
               vehiclePanel ||
               confirmRidePanel ||

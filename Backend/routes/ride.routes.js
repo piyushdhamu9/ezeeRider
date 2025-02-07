@@ -58,6 +58,7 @@ router.post(
   "/end-ride",
   authMiddleware.authCaptain,
   body("rideId").isMongoId().withMessage("Invalid ride id"),
+  body("captainId").isMongoId().withMessage("Invalid captain id"), // Added validation
   rideController.endRide
 );
 

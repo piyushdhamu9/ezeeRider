@@ -26,7 +26,7 @@ module.exports.createRide = async (req, res) => {
 
     // Find captains within 5km radius
     const captainsInRadius = await mapService.getCaptainsInTheRadius(
-      pickupCoordinates.lat, // Corrected
+      pickupCoordinates.lat,
       pickupCoordinates.lng,
       5
     );
@@ -65,7 +65,7 @@ module.exports.getFare = async (req, res) => {
 
     // Find captains within 5km radius
     const captainsInRadius = await mapService.getCaptainsInTheRadius(
-      pickupCoordinates.lat, // Corrected
+      pickupCoordinates.lat,
       pickupCoordinates.lng,
       5
     );
@@ -135,10 +135,10 @@ module.exports.endRide = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { rideId } = req.body;
+  const { rideId, captainId } = req.body;
 
   try {
-    const ride = await rideService.endRide({ rideId, captain: req.captain });
+    const ride = await rideService.endRide({ rideId, captainId });
 
     sendMessageToSocketId(ride.user.socketId, {
       event: "ride-ended",

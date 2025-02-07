@@ -2,24 +2,24 @@ import React from "react";
 
 const RidePopUp = (props) => {
   return (
-    <div>
+    <div className="fixed bottom-0 h-3/4 max-w-md p-6 bg-white shadow-xl rounded-2xl border border-gray-300">
       <h5
         className="p-1 text-center w-[93%] absolute top-0"
         onClick={() => {
           props.setRidePopupPanel(false);
         }}
-      >
-        <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
-      </h5>
+      ></h5>
       <h3 className="text-2xl font-semibold mb-5">New Ride Available!</h3>
       <div className="flex items-center justify-between p-3 bg-yellow-400 rounded-lg mt-4">
         <div className="flex items-center gap-3 ">
           <img
+            width="80"
+            height="80"
+            src="https://img.icons8.com/officel/80/guest-male.png"
+            alt="guest-male"
             className="h-12 rounded-full object-cover w-12"
-            src="https://i.pinimg.com/236x/af/26/28/af26280b0ca305be47df0b799ed1b12b.jpg"
-            alt=""
           />
-          <h2 className="text-lg font-medium">
+          <h2 className="text-lg font-medium capitalize">
             {props.ride?.user.fullname.firstname +
               " " +
               props.ride?.user.fullname.lastname}
@@ -29,29 +29,29 @@ const RidePopUp = (props) => {
       </div>
       <div className="flex gap-2 justify-between flex-col items-center">
         <div className="w-full mt-5">
-          <div className="flex items-center gap-5 p-3 border-b-2">
-            <i className="ri-map-pin-user-fill"></i>
+          <div className="flex items-center gap-3 py-2 border-b">
+            <i className="ri-map-pin-user-fill text-xl text-blue-600"></i>
             <div>
-              <h3 className="text-lg font-medium">Pickup</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {props.ride?.pickup}
-              </p>
+              <h3 className="text-base font-semibold text-gray-800">Pickup</h3>
+              <p className="text-sm text-gray-600">{props.ride?.pickup}</p>
             </div>
           </div>
-          <div className="flex items-center gap-5 p-3 border-b-2">
-            <i className="text-lg ri-map-pin-2-fill"></i>
+          <div className="flex items-center gap-3 py-2 border-b">
+            <i className="ri-map-pin-2-fill text-xl text-red-500"></i>
             <div>
-              <h3 className="text-lg font-medium">Destination</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {props.ride?.destination}
-              </p>
+              <h3 className="text-base font-semibold text-gray-800">
+                Destination
+              </h3>
+              <p className="text-sm text-gray-600">{props.ride?.destination}</p>
             </div>
           </div>
-          <div className="flex items-center gap-5 p-3">
-            <i className="ri-currency-line"></i>
+          <div className="flex items-center gap-3 py-2 border-b">
+            <i className="ri-currency-line text-xl text-green-600"></i>
             <div>
-              <h3 className="text-lg font-medium">₹{props.ride?.fare} </h3>
-              <p className="text-sm -mt-1 text-gray-600">Cash</p>
+              <h3 className="text-base font-semibold text-gray-800">Fare</h3>
+              <h3 className="text-base font-semibold text-gray-800">
+                ₹{props.ride?.fare}{" "}
+              </h3>
             </div>
           </div>
         </div>
