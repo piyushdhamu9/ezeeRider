@@ -36,6 +36,7 @@ const Home = () => {
   const [vehicleType, setVehicleType] = useState(null);
   const [ride, setRide] = useState(null);
   const [availableDrivers, setAvailableDrivers] = useState([]);
+  const [noDriversMessage, setNoDriversMessage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -204,6 +205,13 @@ const Home = () => {
 
     setFare(response.data.fare);
     setAvailableDrivers(response.data.drivers);
+
+    if (response.data.drivers.length === 0) {
+      setNoDriversMessage("No drivers are currently available in your area.");
+      setVehiclePanel(false);
+    } else {
+      setNoDriversMessage(null);
+    }
   }
 
   async function createRide() {
@@ -285,6 +293,9 @@ const Home = () => {
               >
                 Find Trip
               </button>
+              {noDriversMessage && (
+                <p className="text-red-500 mt-2">{noDriversMessage}</p>
+              )}
             </div>
           ) : vehiclePanel ? (
             // Vehicle Panel Section
